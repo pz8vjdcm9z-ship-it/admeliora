@@ -1,0 +1,33 @@
+
+{
+  "id": "./",
+  "name": "AD MELIORA — Las Cartas de mi Vida",
+  "short_name": "AD MELIORA",
+  "description": "Tu espacio personal para entrenamientos, finanzas, lectura, viajes y mucho más.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#08090b",
+  "theme_color": "#08090b",
+  "categories": [
+    "lifestyle",
+    "productivity",
+    "health"
+  ],
+  "icons": [
+    {
+      "src": "./assets/admeliora-shield.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/admeliora-shield.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
