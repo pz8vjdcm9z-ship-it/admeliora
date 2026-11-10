@@ -419,7 +419,7 @@ async function registerServiceWorker() {
     // El archivo actual está en /src/sw.js. Se registra con su ruta real.
     // Su alcance por defecto será /src/; la configuración del alcance raíz
     // se revisará al corregir el propio Service Worker.
-    const registration = await navigator.serviceWorker.register("./src/sw.js");
+    const registration = await navigator.serviceWorker.register("./sw.js");
     console.log(`${APP_NAME}: Service Worker registrado.`, registration.scope);
   } catch (error) {
     console.error("No se pudo registrar el Service Worker:", error);
