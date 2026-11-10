@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- =========================================
+       AD MELIORA
+       LAS CARTAS DE MI VIDA
+       APPLICATION ENTRY POINT
+  ========================================== -->
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#0b0b0b">
+  <meta name="color-scheme" content="dark">
+
+  <meta
+    name="description"
+    content="AD MELIORA. Las Cartas de mi Vida. Entrenamiento, finanzas, cultura, organización y progreso personal."
+  >
+
+  <meta name="application-name" content="AD MELIORA">
+  <meta name="author" content="AD MELIORA">
+
+  <!-- PWA -->
+  <link rel="manifest" href="./manifest.webmanifest">
+
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <!-- iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  >
+  <meta
+    name="apple-mobile-web-app-title"
+    content="AD MELIORA"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="./assets/admeliora-shield.png"
+  >
+
+  <!-- IDENTIDAD -->
+  <link
+    rel="icon"
+    type="image/png"
+    href="./assets/admeliora-shield.png"
+  >
+
+  <!-- ESTILOS PRINCIPALES -->
+  <link rel="stylesheet" href="./styles.css">
+
+  <!-- TÍTULO -->
+  <title>AD MELIORA | Las Cartas de mi Vida</title>
+
+</head>
+
+<body>
+
+  <!-- =========================================
+       APPLICATION ROOT
+  ========================================== -->
+
+  <div
+    id="app"
+    class="app"
+    data-application="admeliora"
+    data-version="1.0.0"
+  >
+
+    <!-- ACCESSIBILITY -->
+    <a
+      class="skip-link"
+      href="#main-content"
+    >
+      Saltar al contenido
+    </a>
+
+    <!-- APPLICATION HEADER -->
+    <header id="app-header"></header>
+
+    <!-- MAIN APPLICATION -->
+    <main
+      id="main-content"
+      role="main"
+      tabindex="-1"
+    >
+
+      <!-- APPLICATION INITIALIZATION -->
+      <section
+        id="app-loading"
+        class="app-loading"
+        aria-live="polite"
+      >
+
+        <img
+          src="./assets/admeliora-shield.png"
+          alt="Escudo AD MELIORA"
+        >
+
+        <h1>AD MELIORA</h1>
+
+        <p>Un poco mejor cada día.</p>
+
+        <span>Preparando tu espacio personal...</span>
+
+      </section>
+
+      <!-- HOME AND MODULES -->
+      <div
+        id="app-content"
+        aria-live="off"
+        hidden
+      ></div>
+
+    </main>
+
+    <!-- APPLICATION NAVIGATION -->
+    <nav
+      id="app-navigation"
+      aria-label="Navegación principal"
+    ></nav>
+
+    <!-- MODAL LAYER -->
+    <div
+      id="modal-root"
+      class="modal-root"
+    ></div>
+
+    <!-- NOTIFICATIONS -->
+    <div
+      id="notification-root"
+      class="notification-root"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+
+  </div>
+
+  <!-- =========================================
+       APPLICATION INITIALIZATION
+  ========================================== -->
+
+  <noscript>
+    <p>
+      AD MELIORA necesita JavaScript para funcionar.
+      Activa JavaScript en tu navegador para continuar.
+    </p>
+  </noscript>
+
+  <script
+    type="module"
+    src="./src/main.js"
+  ></script>
+
+</body>
+</html>
