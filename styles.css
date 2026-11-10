@@ -344,4 +344,181 @@ th{background:var(--panel-light);color:var(--gold-light)}td{color:var(--silver)}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
-/* FIN DEL SISTEMA VISUAL AD MELIOR
+/* FIN DEL SISTEMA VISUAL AD MELIORA */
+
+
+/* =========================================================
+   AJUSTE DE PORTADA — CARTA CENTRAL CUADRADA
+   La carta es el elemento principal al abrir la aplicación.
+   ========================================================= */
+
+/* Portada compacta: elimina bloques que empujaban la carta hacia abajo. */
+body{
+  min-height:100svh;
+  min-height:100dvh;
+  padding-top:calc(var(--safe-top) + 5px);
+  padding-bottom:calc(92px + var(--safe-bottom));
+  overflow-x:hidden;
+}
+.top-controls{
+  min-height:42px;
+  padding-top:2px;
+  padding-bottom:2px;
+}
+#app-header,
+.home-utilities,
+.home-introduction,
+.home-welcome,
+.carousel-heading{
+  display:none!important;
+}
+.app-main{
+  width:100%;
+  min-height:0;
+  max-width:760px;
+  margin:0 auto;
+  padding:0 14px 8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+#app-content,.app-content{
+  width:100%;
+  max-width:760px;
+  margin:0 auto;
+}
+.home-screen{
+  min-height:calc(100svh - 150px - var(--safe-top) - var(--safe-bottom));
+  min-height:calc(100dvh - 150px - var(--safe-top) - var(--safe-bottom));
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+.carousel-section{
+  width:100%;
+  margin:0;
+}
+.carousel-stage{
+  width:100%;
+  max-width: min(100%, 560px);
+  margin:0 auto;
+}
+.carousel-viewport{
+  width:100%;
+  aspect-ratio:1 / 1;
+  border-radius:22px;
+}
+.carousel-track{
+  height:100%;
+}
+.module-card{
+  height:100%;
+  min-height:0;
+  aspect-ratio:1 / 1;
+  padding:clamp(15px,4vw,24px);
+  border-radius:22px;
+}
+.module-card-emblem{
+  min-height:0;
+  padding:8px 0;
+}
+.module-shield{
+  width:min(48%,190px);
+  max-height:42%;
+}
+.shield-fallback{
+  font-size:clamp(58px,16vw,90px);
+}
+.module-symbol{
+  width:clamp(82px,25vw,125px);
+  height:clamp(82px,25vw,125px);
+  font-size:clamp(42px,13vw,62px);
+}
+.module-card-copy h3{
+  font-size:clamp(19px,5vw,27px);
+}
+.module-card-copy p{
+  margin-top:4px;
+  font-size:10px;
+}
+.module-open-button{
+  min-height:40px;
+  margin-top:10px;
+}
+.carousel-arrow{
+  width:32px;
+  height:42px;
+}
+.carousel-footer{
+  padding:7px 0 0;
+  gap:6px;
+}
+.carousel-hint{
+  display:none;
+}
+.spotify-access{
+  flex:0 0 48px;
+  width:48px;
+  height:48px;
+  margin:2px auto 0;
+}
+.spotify-mark{
+  width:25px;
+  height:25px;
+}
+
+/* Barra inferior fija: casa a la izquierda y flecha atrás a la derecha. */
+#app-navigation,.app-navigation{
+  position:fixed;
+  z-index:150;
+  left:0;
+  right:0;
+  bottom:0;
+  width:100%;
+  min-height:calc(66px + var(--safe-bottom));
+  margin:0;
+  padding:8px 14px calc(8px + var(--safe-bottom));
+  display:flex;
+  flex-direction:row;
+  gap:10px;
+  border-top:1px solid rgba(201,164,92,.3);
+  background:rgba(8,8,8,.96);
+  backdrop-filter:blur(14px);
+}
+.navigation-button{
+  flex:1 1 50%;
+  min-width:0;
+  min-height:48px;
+  padding:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+}
+.navigation-button span:not(.navigation-icon){
+  display:none;
+}
+.navigation-icon{
+  font-size:27px;
+  line-height:1;
+}
+#navigation-home{order:1}
+#navigation-back{order:2}
+#navigation-back:disabled{
+  opacity:1;
+  cursor:pointer;
+}
+
+/* En pantallas pequeñas la carta conserva proporción cuadrada. */
+@media(max-height:700px){
+  .home-screen{
+    min-height:calc(100dvh - 125px - var(--safe-top) - var(--safe-bottom));
+  }
+  .carousel-viewport{max-width:min(100%,calc(100dvh - 205px))}
+}
+@media(min-width:700px){
+  .app-main{padding-left:24px;padding-right:24px}
+  .carousel-stage{max-width:min(70vh,560px)}
+}
