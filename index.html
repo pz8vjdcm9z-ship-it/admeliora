@@ -1,165 +1,185 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <!-- =========================================
-       AD MELIORA
-       LAS CARTAS DE MI VIDA
-       APPLICATION ENTRY POINT
-  ========================================== -->
-
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
-  >
-
-  <meta name="theme-color" content="#0b0b0b">
-  <meta name="color-scheme" content="dark">
-
-  <meta
-    name="description"
-    content="AD MELIORA. Las Cartas de mi Vida. Entrenamiento, finanzas, cultura, organización y progreso personal."
-  >
-
-  <meta name="application-name" content="AD MELIORA">
-  <meta name="author" content="AD MELIORA">
-
-  <!-- PWA -->
-  <link rel="manifest" href="./manifest.webmanifest">
-
-  <meta name="mobile-web-app-capable" content="yes">
-
-  <!-- iOS -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="black-translucent"
-  >
-  <meta
-    name="apple-mobile-web-app-title"
-    content="AD MELIORA"
-  >
-
-  <link
-    rel="apple-touch-icon"
-    href="./assets/admeliora-shield.png"
-  >
-
-  <!-- IDENTIDAD -->
-  <link
-    rel="icon"
-    type="image/png"
-    href="./assets/admeliora-shield.png"
-  >
-
-  <!-- ESTILOS PRINCIPALES -->
-  <link rel="stylesheet" href="./styles.css">
-
-  <!-- TÍTULO -->
-  <title>AD MELIORA | Las Cartas de mi Vida</title>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090909">
+<meta name="description" content="AD MELIORA — Las Cartas de mi Vida. Tu espacio personal para avanzar cada día.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>AD MELIORA — Las Cartas de mi Vida</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./assets/admeliora-shield.png" type="image/png">
+<link rel="apple-touch-icon" href="./assets/admeliora-shield.png">
+<link rel="stylesheet" href="./styles.css">
+<style>
+:root{--black:#090909;--panel:#151515;--gold:#c9a85b;--gold2:#ead49a;--white:#f4f0e7;--muted:#a69e8e;--line:rgba(201,168,91,.25)}
+*{box-sizing:border-box}
+html{min-height:100%;background:var(--black);scroll-behavior:smooth}
+body{margin:0;min-width:320px;min-height:100vh;padding-bottom:env(safe-area-inset-bottom);color:var(--white);background:radial-gradient(ellipse at 50% -10%,rgba(201,168,91,.14),transparent 42%),var(--black);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit}button,input,textarea,select{font:inherit}
+:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
+.topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px max(17px,calc((100vw - 930px)/2));min-height:72px;border-bottom:1px solid var(--line);background:rgba(9,9,9,.92);backdrop-filter:blur(16px)}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.crest{width:45px;height:45px;display:grid;place-items:center;flex:0 0 45px;overflow:hidden;border:1px solid rgba(201,168,91,.55);border-radius:14px;background:linear-gradient(145deg,#292316,#101010);color:var(--gold2)}
+.crest img{width:100%;height:100%;object-fit:contain;padding:4px}
+.crest-fallback{font:20px Georgia,serif;letter-spacing:-2px}
+.brand-name{margin:0;color:var(--gold2);font:600 17px Georgia,serif;letter-spacing:.13em}
+.brand-sub{margin:4px 0 0;color:var(--muted);font-size:9px;letter-spacing:.18em;text-transform:uppercase}
+.top-note{color:var(--muted);font-size:10px;white-space:nowrap}
+.shell{width:min(100%,980px);margin:auto;padding:0 18px}
+main{padding-top:25px}
+.welcome{padding:12px 0 23px}
+.eyebrow{margin:0 0 10px;color:var(--gold);font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+h1{margin:0;font:400 clamp(32px,7vw,48px)/1.06 Georgia,serif;letter-spacing:-.035em}
+h1 em{color:var(--gold2)}
+.intro{max-width:570px;margin:12px 0 0;color:var(--muted);font-size:13px;line-height:1.65}
+.datebox{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 27px;padding:14px 16px;border:1px solid var(--line);border-radius:17px;background:linear-gradient(110deg,rgba(201,168,91,.09),rgba(255,255,255,.02))}
+.date-label{color:var(--muted);font-size:10px;letter-spacing:.13em;text-transform:uppercase}
+.date-value{margin-top:4px;font-size:13px;font-weight:600}
+.clock{color:var(--gold2);font-size:20px;font-variant-numeric:tabular-nums}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:10px;margin:27px 0 14px}
+.section-head h2{margin:0;font:400 24px Georgia,serif}
+.section-head p{margin:5px 0 0;color:var(--muted);font-size:11px}
+.section-mark{color:var(--gold);font-size:9px;letter-spacing:.18em}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.card{position:relative;isolation:isolate;display:flex;min-height:188px;flex-direction:column;justify-content:space-between;overflow:hidden;padding:15px;border:1px solid var(--line);border-radius:21px;background:linear-gradient(150deg,#242016,#111 68%);text-decoration:none;transition:transform .2s,border-color .2s}
+.card:active{transform:scale(.985)}
+.card:after{position:absolute;z-index:-1;top:-32px;right:-29px;width:145px;height:145px;border:1px solid rgba(234,212,154,.15);border-radius:50%;box-shadow:0 0 0 17px rgba(234,212,154,.025),0 0 0 35px rgba(234,212,154,.018);content:""}
+.card-art{position:absolute;z-index:-1;top:12px;right:5px;width:112px;height:112px;opacity:.72}
+.card-art svg{width:100%;height:100%}
+.card-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.card-num{color:#d6bd7d;font-size:9px;letter-spacing:.16em}
+.card-icon{display:grid;place-items:center;width:31px;height:31px;border:1px solid rgba(234,212,154,.3);border-radius:10px;color:var(--gold2)}
+.card-copy{margin-top:28px}
+.card h3{max-width:90%;margin:0;font:400 21px Georgia,serif;color:#f5efdf}
+.card p{max-width:95%;margin:6px 0 0;color:#aaa18e;font-size:10px;line-height:1.5}
+.card-open{display:flex;justify-content:space-between;align-items:center;margin-top:14px;color:var(--gold2);font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+.card-open b{font-size:17px;font-weight:400}
+.feature{position:relative;overflow:hidden;margin-top:24px;padding:21px;border:1px solid rgba(201,168,91,.3);border-radius:22px;background:radial-gradient(circle at 100% 0,rgba(201,168,91,.18),transparent 43%),linear-gradient(135deg,#1c1913,#101010 72%)}
+.feature h2{max-width:270px;margin:0;color:var(--gold2);font:400 25px/1.12 Georgia,serif}
+.feature p:last-child{max-width:470px;margin:10px 0 0;color:var(--muted);font-size:12px;line-height:1.6}
+.feature-mark{position:absolute;right:18px;top:18px;color:rgba(234,212,154,.16);font:76px Georgia,serif}
+.spotify{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:25px 0 10px;padding:15px 17px;border:1px solid rgba(30,215,96,.36);border-radius:17px;background:linear-gradient(100deg,rgba(30,215,96,.1),#121212 60%);text-decoration:none}
+.spotify-brand{display:flex;align-items:center;gap:12px}
+.spotify-logo{width:35px;height:35px;flex:0 0 35px}
+.spotify-title{display:block;font-size:13px;font-weight:700}
+.spotify-caption{display:block;margin-top:4px;color:#a9b5aa;font-size:10px}
+.spotify-arrow{color:#1ed760;font-size:20px}
+footer{margin:26px 0 10px;padding:18px 0 8px;border-top:1px solid rgba(201,168,91,.15);color:#766f61;text-align:center;font-size:9px;letter-spacing:.12em;line-height:1.8;text-transform:uppercase}
+footer strong{color:var(--gold);font-weight:600}
+#app-loading{padding:20px;color:var(--muted);text-align:center;font-size:11px}
+#app-navigation,#modal-root,#notification-root{position:relative;z-index:40}
+.noscript{margin:15px 0;padding:13px;border:1px solid #9c5b4e;border-radius:12px;color:#f0c7bd;background:#241513;font-size:12px}
+@media(min-width:650px){.shell{padding:0 26px}.cards{grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}.card{min-height:218px;padding:17px}.card-art{width:125px;height:125px}.welcome{padding-top:25px}}
+@media(max-width:370px){.shell{padding:0 13px}.topbar{padding-right:13px;padding-left:13px}.brand-name{font-size:15px}.top-note{font-size:9px}.card{min-height:174px;padding:12px}.card h3{font-size:19px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
+</style>
 </head>
-
 <body>
-
-  <!-- =========================================
-       APPLICATION ROOT
-  ========================================== -->
-
-  <div
-    id="app"
-    class="app"
-    data-application="admeliora"
-    data-version="1.0.0"
-  >
-
-    <!-- ACCESSIBILITY -->
-    <a
-      class="skip-link"
-      href="#main-content"
-    >
-      Saltar al contenido
-    </a>
-
-    <!-- APPLICATION HEADER -->
-    <header id="app-header"></header>
-
-    <!-- MAIN APPLICATION -->
-    <main
-      id="main-content"
-      role="main"
-      tabindex="-1"
-    >
-
-      <!-- APPLICATION INITIALIZATION -->
-      <section
-        id="app-loading"
-        class="app-loading"
-        aria-live="polite"
-      >
-
-        <img
-          src="./assets/admeliora-shield.png"
-          alt="Escudo AD MELIORA"
-        >
-
-        <h1>AD MELIORA</h1>
-
-        <p>Un poco mejor cada día.</p>
-
-        <span>Preparando tu espacio personal...</span>
-
-      </section>
-
-      <!-- HOME AND MODULES -->
-      <div
-        id="app-content"
-        aria-live="off"
-        hidden
-      ></div>
-
-    </main>
-
-    <!-- APPLICATION NAVIGATION -->
-    <nav
-      id="app-navigation"
-      aria-label="Navegación principal"
-    ></nav>
-
-    <!-- MODAL LAYER -->
-    <div
-      id="modal-root"
-      class="modal-root"
-    ></div>
-
-    <!-- NOTIFICATIONS -->
-    <div
-      id="notification-root"
-      class="notification-root"
-      role="status"
-      aria-live="polite"
-      aria-atomic="true"
-    ></div>
-
+<header class="topbar" id="app-header">
+  <div class="brand">
+    <div class="crest" aria-label="Escudo AD MELIORA">
+      <img src="./assets/admeliora-shield.png" alt="Escudo de AD MELIORA" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+      <span class="crest-fallback" hidden>AM</span>
+    </div>
+    <div><p class="brand-name">AD MELIORA</p><p class="brand-sub">Las Cartas de mi Vida</p></div>
   </div>
+  <div class="top-note">Tu espacio personal</div>
+</header>
 
-  <!-- =========================================
-       APPLICATION INITIALIZATION
-  ========================================== -->
+<main class="shell" id="main-content">
+  <section class="welcome" aria-labelledby="main-title">
+    <p class="eyebrow">Un paso más, cada día</p>
+    <h1 id="main-title">Construye tu mejor <em>versión.</em></h1>
+    <p class="intro">Un espacio personal para organizar tus objetivos, cuidar tus hábitos, guardar tus recuerdos y seguir avanzando.</p>
+  </section>
 
-  <noscript>
-    <p>
-      AD MELIORA necesita JavaScript para funcionar.
-      Activa JavaScript en tu navegador para continuar.
-    </p>
-  </noscript>
+  <section class="datebox" aria-label="Fecha y hora">
+    <div><div class="date-label">Hoy</div><div class="date-value" id="am-current-date">Preparando fecha…</div></div>
+    <time class="clock" id="am-current-time">--:--</time>
+  </section>
 
-  <script
-    type="module"
-    src="./src/main.js"
-  ></script>
+  <section aria-labelledby="cards-title">
+    <div class="section-head"><div><h2 id="cards-title">Tus cartas</h2><p>Elige el espacio que quieres abrir.</p></div><span class="section-mark">AD MELIORA</span></div>
+    <div class="cards" id="am-home-cards">
+      <a class="card" href="#entrenamientos" data-module="training">
+        <div class="card-art" aria-hidden="true"><svg viewBox="0 0 140 140" fill="none"><path d="M18 80h104M30 63v34M42 52v56M98 52v56M110 63v34" stroke="#d9b96c" stroke-width="7" stroke-linecap="round"/><path d="M42 70h56" stroke="#f1d99a" stroke-width="3"/><circle cx="70" cy="70" r="48" stroke="#d9b96c" stroke-opacity=".22"/></svg></div>
+        <div class="card-top"><span class="card-num">01 / CUERPO</span><span class="card-icon">✦</span></div><div class="card-copy"><h3>Entrenamientos</h3><p>Rutinas, ejercicios, cargas y evolución.</p></div><div class="card-open"><span>Abrir carta</span><b>↗</b></div>
+      </a>
+      <a class="card" href="#finanzas" data-module="finance">
+        <div class="card-art" aria-hidden="true"><svg viewBox="0 0 140 140" fill="none"><rect x="28" y="29" width="84" height="82" rx="12" stroke="#d9b96c" stroke-width="2"/><path d="M43 87l17-19 13 10 25-31" stroke="#f1d99a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M86 47h12v12" stroke="#f1d99a" stroke-width="3"/><circle cx="70" cy="70" r="53" stroke="#d9b96c" stroke-opacity=".18"/></svg></div>
+        <div class="card-top"><span class="card-num">02 / CONTROL</span><span class="card-icon">◈</span></div><div class="card-copy"><h3>Finanzas</h3><p>Ingresos, gastos, presupuestos y balance.</p></div><div class="card-open"><span>Abrir carta</span><b>↗</b></div>
+      </a>
+      <a class="card" href="#cartelera" data-module="screen">
+        <div class="card-art" aria-hidden="true"><svg viewBox="0 0 140 140" fill="none"><rect x="31" y="27" width="78" height="88" rx="9" stroke="#d9b96c" stroke-width="2"/><path d="M49 27l12 18M75 27l12 18M101 27l8 12" stroke="#d9b96c" stroke-width="3"/><path d="M61 57l29 17-29 17V57z" fill="#d9b96c" fill-opacity=".8"/><circle cx="70" cy="70" r="54" stroke="#d9b96c" stroke-opacity=".17"/></svg></div>
+        <div class="card-top"><span class="card-num">03 / HISTORIAS</span><span class="card-icon">▷</span></div><div class="card-copy"><h3>Cartelera</h3><p>Películas, series, documentales y valoraciones.</p></div><div class="card-open"><span>Abrir carta</span><b>↗</b></div>
+      </a>
+      <a class="card" href="#cocteleria" data-module="cocktails">
+        <div class="card-art" aria-hidden="true"><svg viewBox="0 0 140 140" fill="none"><path d="M35 34h70L73 77v31M55 110h36" stroke="#d9b96c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M46 46h48L72 73 46 46z" fill="#d9b96c" fill-opacity=".24"/><path d="M91 23l12 12M102 22l-12 12" stroke="#f1d99a" stroke-width="3"/><circle cx="70" cy="70" r="53" stroke="#d9b96c" stroke-opacity=".17"/></svg></div>
+        <div class="card-top"><span class="card-num">04 / SABORES</span><span class="card-icon">◇</span></div><div class="card-copy"><h3>Coctelería</h3><p>Recetas, ingredientes y favoritos.</p></div><div class="card-open"><span>Abrir carta</span><b>↗</b></div>
+      </a>
+      <a class="card" href="#deportes" data-module="sports">
+        <div class="card-art" aria-hidden="true"><svg viewBox="0 0 140 140" fill="none"><circle cx="70" cy="70" r="43" stroke="#d9b96c" stroke-width="2"/><path d="M70 27l16 13-6 20H60l-6-20 16-13zM27 70l17-12 18 10-1 20-20 8-14-26zM113 70L96 58 78 68l1 20 20 8 14-26zM44 105l17-17h18l17 17" stroke="#f1d99a" stroke-width="2" stroke-linejoin="round"/></svg></div>
+        <div class="card-top"><span class="card-num">05 / COMPETICIÓN</span><span class="card-icon">⚽</span></div><div class="card-copy"><h3>Deportes</h3><p>Equipos, competiciones, calendarios y resultados.</p></div><div class="card-open"><span>Abrir carta</span><b>↗</b></div>
+      </a>
+      <a class="card" href="#lectura" data-module="reading">
+        <div class="card-art" aria-hidden="true"><svg viewBox="0 0 140 140" fill="none"><path d="M70 43c-16-13-33-13-48-7v65c17-7 33-5 48 8 15-13 31-15 48-8V36c-15-6-32-6-48 7z" stroke="#d9b96c" stroke-width="2.5"/><path d="M70 43v66M34 54c10-2 19 0 27 5M34 68c10-2 19 0 27 5M106 54c-10-2-19 0-27 5M106 68c-10-2-19 0-27 5" stroke="#f1d99a" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <div class="card-top"><span class="card-num">06 / CONOCIMIENTO</span><span class="card-icon">▤</span></div><div class="card-copy"><h3>Lectura</h3><p>Biblioteca, progreso, notas y valoraciones.</p></div><div class="card-open"><span>Abrir carta</span><b>↗</b></div>
+      </a>
+      <a class="card" href="#viajes" data-module="travel">
+        <div class="card-art" aria-hidden="true"><svg viewBox="0 0 140 140" fill="none"><path d="M31 100l22-59 22 21 34-24-13 67-31-15-34 10z" stroke="#d9b96c" stroke-width="2.5"/><path d="M53 41l12 64M75 62l-10 43M109 38L75 62" stroke="#f1d99a" stroke-width="2"/><path d="M87 32c0-8 6-14 14-14s14 6 14 14c0 11-14 25-14 25S87 43 87 32z" fill="#d9b96c" fill-opacity=".25" stroke="#d9b96c" stroke-width="2"/><circle cx="101" cy="32" r="4" fill="#f1d99a"/></svg></div>
+        <div class="card-top"><span class="card-num">07 / DESCUBRIR</span><span class="card-icon">⌖</span></div><div class="card-copy"><h3>Viajes</h3><p>Destinos, itinerarios, presupuestos y recuerdos.</p></div><div class="card-open"><span>Abrir carta</span><b>↗</b></div>
+      </a>
+      <a class="card" href="#notas" data-module="notes">
+        <div class="card-art" aria-hidden="true"><svg viewBox="0 0 140 140" fill="none"><path d="M43 25h43l17 17v73H43V25z" stroke="#d9b96c" stroke-width="2.5"/><path d="M86 25v19h17M56 60h34M56 73h34M56 86h24" stroke="#f1d99a" stroke-width="2.5" stroke-linecap="round"/><path d="M30 38v78h62" stroke="#d9b96c" stroke-opacity=".5" stroke-width="2"/></svg></div>
+        <div class="card-top"><span class="card-num">08 / IDEAS</span><span class="card-icon">✎</span></div><div class="card-copy"><h3>Notas</h3><p>Ideas, apuntes personales y listas.</p></div><div class="card-open"><span>Abrir carta</span><b>↗</b></div>
+      </a>
+    </div>
+  </section>
 
+  <section class="feature" aria-label="Filosofía AD MELIORA">
+    <span class="feature-mark" aria-hidden="true">AM</span>
+    <p class="eyebrow">Ad meliora</p>
+    <h2>Pequeños pasos. Grandes cambios.</h2>
+    <p>Tus objetivos y tus recuerdos, organizados en un mismo lugar. Avanza a tu ritmo y construye tu propio camino.</p>
+  </section>
+
+  <a class="spotify" href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer" aria-label="Abrir Spotify en una nueva pestaña">
+    <span class="spotify-brand">
+      <svg class="spotify-logo" viewBox="0 0 24 24" role="img" aria-label="Spotify"><circle cx="12" cy="12" r="12" fill="#1ED760"/><path d="M5.1 9.1c4.4-1.35 9.9-.95 13.9 1.45M6.1 12.2c3.7-1.05 8.2-.68 11.5 1.3M7 15.1c3.05-.78 6.45-.48 9.05 1.05" fill="none" stroke="#07140b" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <span><span class="spotify-title">Escuchar en Spotify</span><span class="spotify-caption">Abrir Spotify · acceso externo</span></span>
+    </span><span class="spotify-arrow" aria-hidden="true">↗</span>
+  </a>
+
+  <footer><strong>AD MELIORA</strong><br>Las Cartas de mi Vida · Tu espacio personal</footer>
+
+  <section id="app-loading" aria-live="polite">Preparando tu espacio personal…</section>
+  <section id="app-content" aria-live="polite" aria-busy="true"></section>
+</main>
+
+<nav id="app-navigation" aria-label="Navegación principal"></nav>
+<div id="modal-root"></div>
+<div id="notification-root" aria-live="polite" aria-atomic="true"></div>
+
+<noscript><div class="shell"><p class="noscript">AD MELIORA necesita JavaScript para abrir sus módulos y guardar tus datos. Activa JavaScript y vuelve a cargar la aplicación.</p></div></noscript>
+
+<script>
+(function(){
+  "use strict";
+  const dateNode=document.getElementById("am-current-date");
+  const timeNode=document.getElementById("am-current-time");
+  const dateFormat=new Intl.DateTimeFormat("es-ES",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+  const timeFormat=new Intl.DateTimeFormat("es-ES",{hour:"2-digit",minute:"2-digit"});
+  function updateClock(){
+    const now=new Date();
+    if(dateNode){const value=dateFormat.format(now);dateNode.textContent=value.charAt(0).toLocaleUpperCase("es-ES")+value.slice(1);}
+    if(timeNode){timeNode.textContent=timeFormat.format(now);timeNode.dateTime=now.toISOString();}
+  }
+  updateClock();
+  window.setInterval(updateClock,30000);
+})();
+</script>
+<script type="module" src="./src/main.js"></script>
 </body>
 </html>
