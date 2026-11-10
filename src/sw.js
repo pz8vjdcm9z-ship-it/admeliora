@@ -1,10 +1,5 @@
 
-/* =====================================================
-   AD MELIORA — SERVICE WORKER
-   Caché y funcionamiento sin conexión
-   ===================================================== */
-
-const CACHE_NAME = "ad-meliora-v1";
+const CACHE_NAME = "ad-meliora-v2";
 
 const APP_FILES = [
   "./",
@@ -12,108 +7,71 @@ const APP_FILES = [
   "./styles.css",
   "./manifest.webmanifest",
   "./src/main.js",
-  "./src/database.js"
+  "./src/database.js",
+  "./assets/ad-meliora-escudo.jpeg"
 ];
-
-/* =====================================================
-   1. INSTALACIÓN
-   ===================================================== */
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(APP_FILES))
-      .then(() => self.skipWaiting())
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(APP_FILES);
+    })
   );
-});
 
-/* =====================================================
-   2. ACTIVACIÓN
-   ===================================================== */
+  self.skipWaiting();
+});
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys()
-      .then((cacheNames) => {
-        return Promise.all(
-          cacheNames
-            .filter((name) => {
-              return name.startsWith("ad-meliora-") &&
-                name !== CACHE_NAME;
-            })
-            .map((name) => caches.delete(name))
-        );
-      })
-      .then(() => self.clients.claim())
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys
+          .filter((key) => key.startsWith("ad-meliora-") && key !== CACHE_NAME)
+          .map((key) => caches.delete(key))
+      )
+    )
   );
-});
 
-/* =====================================================
-   3. PETICIONES Y MODO SIN CONEXIÓN
-   ===================================================== */
+  self.clients.claim();
+});
 
 self.addEventListener("fetch", (event) => {
   const request = event.request;
 
-  // Sólo gestionamos peticiones GET del mismo origen.
-  if (
-    request.method !== "GET" ||
-    new URL(request.url).origin !== self.location.origin
-  ) {
-    return;
-  }
+  if (request.method !== "GET") return;
 
-  // Para la navegación, intentamos obtener la versión
-  // más reciente y usamos la copia local si no hay red.
+  const url = new URL(request.url);
+
+  if (url.origin !== self.location.origin) return;
+
   if (request.mode === "navigate") {
     event.respondWith(
       fetch(request)
         .then((response) => {
-          if (response && response.ok) {
+          if (response.ok) {
             const copy = response.clone();
-
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(request, copy);
-            });
+            caches.open(CACHE_NAME).then((cache) => cache.put("./index.html", copy));
           }
-
           return response;
         })
         .catch(async () => {
-          return (
-            await caches.match(request) ||
-            await caches.match("./index.html") ||
-            Response.error()
-          );
+          return (await caches.match("./index.html")) || Response.error();
         })
     );
-
     return;
   }
 
-  // Para archivos de la aplicación, usamos primero
-  // la copia guardada y después la red.
   event.respondWith(
-    caches.match(request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
+    caches.match(request).then((cached) => {
+      if (cached) return cached;
 
       return fetch(request).then((response) => {
-        if (response && response.ok) {
+        if (response.ok) {
           const copy = response.clone();
-
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(request, copy);
-          });
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
         }
-
         return response;
       });
     })
   );
 });
-
-/* =====================================================
-   FIN DEL SERVICE WORKER
-   ===================================================== */
