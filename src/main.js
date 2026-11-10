@@ -10,7 +10,7 @@ import {
 } from "./database.js";
 
 /* =====================================================
-   1. CONFIGURACIÓN DE LA APLICACIÓN
+   1. CONFIGURACIÓN
    ===================================================== */
 
 const APP_NAME = "AD MELIORA";
@@ -67,7 +67,7 @@ const MODULES = [
   {
     id: "settings",
     title: "AJUSTES",
-    description: "Personalización y gestión de la aplicación.",
+    description: "Personalización y gestión.",
     icon: "⚙️"
   }
 ];
@@ -77,16 +77,13 @@ const MODULES = [
    ===================================================== */
 
 const appHeader = document.getElementById("app-header");
-const mainContent = document.getElementById("main-content");
 const appContent = document.getElementById("app-content");
 const appLoading = document.getElementById("app-loading");
 const appNavigation = document.getElementById("app-navigation");
-const modalRoot = document.getElementById("modal-root");
 const notificationRoot = document.getElementById("notification-root");
 
 let currentView = "home";
 let currentModule = null;
-let databaseReady = false;
 
 /* =====================================================
    3. UTILIDADES
@@ -151,6 +148,12 @@ function updateClock() {
   if (clock) {
     clock.textContent = getCurrentTime();
   }
+
+  const homeTime = document.getElementById("home-time");
+
+  if (homeTime) {
+    homeTime.textContent = getCurrentTime();
+  }
 }
 
 /* =====================================================
@@ -165,7 +168,10 @@ function renderHome() {
     <section class="home-screen">
 
       <header class="home-introduction text-center">
-        <div class="eyebrow">BIENVENIDO A TU ESPACIO PERSONAL</div>
+
+        <div class="eyebrow">
+          BIENVENIDO A TU ESPACIO PERSONAL
+        </div>
 
         <h1 class="section-title">
           AD MELIORA
@@ -176,6 +182,7 @@ function renderHome() {
         </p>
 
         <div class="home-date">
+
           <div class="text-gold" id="home-date">
             ${escapeHTML(getCurrentDate())}
           </div>
@@ -183,7 +190,9 @@ function renderHome() {
           <div class="text-muted" id="home-time">
             ${getCurrentTime()}
           </div>
+
         </div>
+
       </header>
 
       <div class="divider"></div>
@@ -191,6 +200,7 @@ function renderHome() {
       <section class="modules-section">
 
         <div class="flex-between mb-20">
+
           <h2 class="section-title">
             MIS CARTAS
           </h2>
@@ -198,6 +208,7 @@ function renderHome() {
           <span class="eyebrow">
             ${MODULES.length} MÓDULOS
           </span>
+
         </div>
 
         <div class="cards-carousel" id="modules-carousel">
@@ -234,12 +245,14 @@ function renderHome() {
           id="carousel-indicators"
           aria-label="Posición del carrusel"
         >
+
           ${MODULES.map((module, index) => `
             <span
               class="carousel-indicator ${index === 0 ? "active" : ""}"
               data-indicator="${index}"
             ></span>
           `).join("")}
+
         </div>
 
       </section>
@@ -247,6 +260,7 @@ function renderHome() {
       <div class="divider"></div>
 
       <section class="home-footer text-center">
+
         <p class="text-gold">
           PER ASPERA AD MELIORA
         </p>
@@ -254,6 +268,7 @@ function renderHome() {
         <p class="text-muted">
           A través de las dificultades, hacia algo mejor.
         </p>
+
       </section>
 
     </section>
@@ -271,7 +286,10 @@ function renderHome() {
 
 function setupCarousel() {
   const carousel = document.getElementById("modules-carousel");
-  const indicators = document.querySelectorAll("[data-indicator]");
+
+  const indicators = document.querySelectorAll(
+    "[data-indicator]"
+  );
 
   if (!carousel) return;
 
@@ -292,7 +310,9 @@ function setupCarousel() {
         card.getBoundingClientRect().left +
         card.offsetWidth / 2;
 
-      const distance = Math.abs(carouselCenter - cardCenter);
+      const distance = Math.abs(
+        carouselCenter - cardCenter
+      );
 
       if (distance < nearestDistance) {
         nearestDistance = distance;
@@ -308,14 +328,20 @@ function setupCarousel() {
     });
   }
 
-  carousel.addEventListener("scroll", updateIndicators, {
-    passive: true
-  });
+  carousel.addEventListener(
+    "scroll",
+    updateIndicators,
+    { passive: true }
+  );
 
   indicators.forEach((indicator) => {
     indicator.addEventListener("click", () => {
       const index = Number(indicator.dataset.indicator);
-      const cards = carousel.querySelectorAll(".module-card");
+
+      const cards = carousel.querySelectorAll(
+        ".module-card"
+      );
+
       const card = cards[index];
 
       if (card) {
@@ -339,7 +365,11 @@ function openModule(moduleId) {
   const module = getModule(moduleId);
 
   if (!module) {
-    showNotification("No se ha encontrado este módulo.", "error");
+    showNotification(
+      "No se ha encontrado este módulo.",
+      "error"
+    );
+
     return;
   }
 
@@ -358,11 +388,17 @@ function openModule(moduleId) {
       </button>
 
       <header class="text-center mt-20">
-        <div class="module-card-icon" style="margin: 0 auto 16px;">
+
+        <div
+          class="module-card-icon"
+          style="margin: 0 auto 16px;"
+        >
           ${escapeHTML(module.icon)}
         </div>
 
-        <div class="eyebrow">AD MELIORA</div>
+        <div class="eyebrow">
+          AD MELIORA
+        </div>
 
         <h1 class="section-title">
           ${escapeHTML(module.title)}
@@ -371,6 +407,7 @@ function openModule(moduleId) {
         <p class="section-subtitle">
           ${escapeHTML(module.description)}
         </p>
+
       </header>
 
       <div class="divider"></div>
@@ -392,7 +429,11 @@ function openModule(moduleId) {
   `;
 
   renderNavigation();
-  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
 
 /* =====================================================
@@ -407,8 +448,10 @@ function renderNavigation() {
       data-action="home"
       aria-label="Inicio"
     >
+
       <span class="navigation-icon">⌂</span>
       <span>INICIO</span>
+
     </button>
 
     <button
@@ -417,7 +460,9 @@ function renderNavigation() {
       data-action="shield"
       aria-label="Entrenamientos"
     >
+
       <span class="navigation-shield">AM</span>
+
     </button>
 
     <button
@@ -426,8 +471,10 @@ function renderNavigation() {
       data-action="back"
       aria-label="Volver"
     >
+
       <span class="navigation-icon">←</span>
       <span>ATRÁS</span>
+
     </button>
   `;
 }
@@ -438,7 +485,11 @@ function renderNavigation() {
 
 function goHome() {
   renderHome();
-  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
 
 function goBack() {
@@ -467,7 +518,8 @@ function showNotification(message, type = "info") {
   notification.setAttribute("role", "status");
 
   if (type === "error") {
-    notification.style.borderColor = "rgba(212, 91, 91, 0.7)";
+    notification.style.borderColor =
+      "rgba(212, 91, 91, 0.7)";
   }
 
   notification.textContent = message;
@@ -485,8 +537,8 @@ function showNotification(message, type = "info") {
 
 function setupEvents() {
 
-  // Abrir una carta del carrusel.
   appContent.addEventListener("click", (event) => {
+
     const card = event.target.closest("[data-module]");
 
     if (card) {
@@ -497,22 +549,28 @@ function setupEvents() {
     if (event.target.closest("#back-home-button")) {
       goHome();
     }
+
   });
 
-  // Permitir abrir cartas con teclado.
   appContent.addEventListener("keydown", (event) => {
+
     const card = event.target.closest(".module-card");
 
     if (!card) return;
 
-    if (event.key === "Enter" || event.key === " ") {
+    if (
+      event.key === "Enter" ||
+      event.key === " "
+    ) {
       event.preventDefault();
+
       openModule(card.dataset.module);
     }
+
   });
 
-  // Navegación inferior.
   appNavigation.addEventListener("click", (event) => {
+
     const button = event.target.closest("[data-action]");
 
     if (!button) return;
@@ -530,28 +588,76 @@ function setupEvents() {
     if (action === "back") {
       goBack();
     }
+
   });
+
 }
 
 /* =====================================================
-   12. INICIALIZACIÓN
+   12. REGISTRO DEL SERVICE WORKER
+   ===================================================== */
+
+async function registerServiceWorker() {
+
+  if (!("serviceWorker" in navigator)) {
+    console.warn(
+      "Este navegador no admite Service Worker."
+    );
+
+    return;
+  }
+
+  if (!window.isSecureContext) {
+    console.warn(
+      "El Service Worker necesita una conexión HTTPS."
+    );
+
+    return;
+  }
+
+  try {
+
+    const registration =
+      await navigator.serviceWorker.register("./sw.js", {
+        scope: "./"
+      });
+
+    console.log(
+      "AD MELIORA: Service Worker registrado.",
+      registration.scope
+    );
+
+  } catch (error) {
+
+    console.error(
+      "No se pudo registrar el Service Worker:",
+      error
+    );
+
+  }
+
+}
+
+/* =====================================================
+   13. INICIALIZACIÓN
    ===================================================== */
 
 async function initializeApp() {
+
   try {
+
     renderHeader();
     setupEvents();
 
-    // Abrir la base de datos local.
     await openDatabase();
 
     const databaseStatus = await checkDatabase();
 
     if (!databaseStatus.available) {
-      throw new Error("No se pudo comprobar la base de datos.");
+      throw new Error(
+        "No se pudo comprobar la base de datos."
+      );
     }
-
-    databaseReady = true;
 
     renderHome();
 
@@ -561,14 +667,24 @@ async function initializeApp() {
 
     appContent.hidden = false;
 
-    showNotification("AD MELIORA está preparada.");
+    showNotification(
+      "AD MELIORA está preparada."
+    );
 
   } catch (error) {
-    console.error("Error al iniciar AD MELIORA:", error);
+
+    console.error(
+      "Error al iniciar AD MELIORA:",
+      error
+    );
 
     if (appLoading) {
+
+      appLoading.hidden = false;
+
       appLoading.innerHTML = `
         <div class="card text-center">
+
           <h2 class="card-title">
             NO SE HA PODIDO INICIAR
           </h2>
@@ -584,26 +700,41 @@ async function initializeApp() {
           >
             VOLVER A INTENTAR
           </button>
+
         </div>
       `;
+
     }
 
     appContent.hidden = true;
 
-    const retryButton = document.getElementById("retry-app-button");
+    const retryButton = document.getElementById(
+      "retry-app-button"
+    );
 
     if (retryButton) {
-      retryButton.addEventListener("click", initializeApp);
+      retryButton.addEventListener(
+        "click",
+        initializeApp
+      );
     }
+
   }
+
 }
 
 /* =====================================================
-   13. ARRANQUE
+   14. ARRANQUE DE LA APLICACIÓN
    ===================================================== */
 
 initializeApp();
 
+registerServiceWorker();
+
+/* Actualizar el reloj cada minuto. */
+
+window.setInterval(updateClock, 60000);
+
 /* =====================================================
-   FIN DE MAIN.JS
+   FIN DE AD MELIORA — MAIN.JS
    ===================================================== */
